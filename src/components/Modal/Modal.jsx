@@ -1,33 +1,27 @@
-import React, { useEffect } from 'react';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+/* eslint-disable */
+import { useEffect } from 'react';
+import css from './Modal.module.scss';
 
-const Modal = ({ imageUrls }) => {
+export default function Modal({ imageUrl, onClose }) {
   useEffect(() => {
-    const lightbox = new SimpleLightbox(
-      imageUrls.map(url => ({ src: url })),
-      {
-        elements: '.gallery a',
-        closeOnOverlayClick: false, // Ensure the overlay doesn't close the modal
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        onClose();
       }
-    );
-    lightbox.on('show.simplelightbox', function (e) {
-      e.preventDefault();
-    });
-    return () => {
-      lightbox.destroy();
     };
-  }, [imageUrls]);
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   return (
-    <div className="gallery">
-      {imageUrls.map((url, index) => (
-        <a href={url} key={index}>
-          <img src={url} alt={`Image ${index}`} />
-        </a>
-      ))}
-    </div>
+    <>
+      <div className={css.modal} onClick={onClose}>
+        <img className={css.modalImage} src={imageUrl} alt="" />
+      </div>
+    </>
   );
-};
-
-export default Modal;
+}

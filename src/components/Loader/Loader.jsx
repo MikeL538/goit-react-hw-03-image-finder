@@ -1,9 +1,6 @@
-export default function Loader() {
-  return (
-    <div>
-      <div>
-        <img src="" alt="" />
-      </div>
-    </div>
-  );
+import React from 'react';
+import { InfinitySpin } from 'react-loader-spinner';
+
+export default function Spinner() {
+  return <InfinitySpin color="white" ariaLabel="loading" />;
 }

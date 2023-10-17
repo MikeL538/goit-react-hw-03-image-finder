@@ -29,11 +29,13 @@ ul {
 
     > div {
       display: flex;
+      gap: 15px;
+      margin-top: 3px;
 
       > p {
-        align-items: center;
         display: flex;
         flex-wrap: wrap;
+        font-size: 16px;
         justify-content: center;
       }
     }
