@@ -2,7 +2,6 @@ import css from './LoadMoreButton.module.scss';
 
 export default function LoadMoreButton({ onLoadMore }) {
   function handleLoadMore() {
-    console.log('Load more button clicked');
     onLoadMore();
   }
 

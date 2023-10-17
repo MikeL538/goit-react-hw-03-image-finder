@@ -1,15 +1,12 @@
 /* eslint-disable */
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ModalBox from 'components/Modal/Modal';
+import Modal from 'components/Modal/Modal';
 
 export default function ImageGalleryItem({ searchTerm, page }) {
   const ApiKey = '38531038-07b18ea2bd70e8e8bef0f3931';
   const [images, setImages] = useState([]);
   const [siteLoaded, setSiteLoaded] = useState(false);
-
-  const [selectedImageUrl, setSelectedImageUrl] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchImageData = () => {
     axios
@@ -45,15 +42,7 @@ export default function ImageGalleryItem({ searchTerm, page }) {
     <>
       {images.map(img => (
         <li key={img.id}>
-          <a
-            href={img.largeImageURL}
-            //
-            onClick={e => {
-              e.preventDefault();
-              setSelectedImageUrl(img.largeImageURL);
-              setIsModalOpen(true);
-            }}
-          >
+          <a href={img.largeImageURL}>
             <img src={img.webformatURL} alt={img.tags} loading="lazy" />
           </a>
           <div>
@@ -72,14 +61,6 @@ export default function ImageGalleryItem({ searchTerm, page }) {
           </div>
         </li>
       ))}
-
-      {isModalOpen && (
-        <ModalBox
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
-          imageUrl={selectedImageUrl}
-        />
-      )}
     </>
   );
 }
