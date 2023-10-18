@@ -51,7 +51,7 @@ export default function ImageGalleryItem({ searchTerm, page }) {
 
       {images.map(img => (
         <li key={img.id}>
-          <a href="#" onClick={() => handleImageClick(img.largeImageURL)}>
+          <a onClick={() => handleImageClick(img.largeImageURL)}>
             <img src={img.webformatURL} alt={img.tags} loading="lazy" />
           </a>
           <div>
